@@ -1,0 +1,58 @@
+<ol class="breadcrumb" breadcrumb="">
+        <li class="breadcrumb-item ng-scope active"><span>日志记录</span></li>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+              <div class="card">
+
+                  <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group row">
+                            <div class="col-sm-2">
+                              <label class="form-control-label" for="eventType">事件类型</label>
+                            </div>
+                            <div class="col-sm-3">
+                              <select id="eventType" ng-change="loadLogs(eventType)" ng-model="eventType" class="form-control">
+                                <option value="">Please select one</option>
+                                <option value="parse">意图识别</option>
+                                <option value="train">模型训练</option>
+                                <option value="config">配置设置</option>
+                                <option value="status">状态查询</option>
+                              </select>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="card-block">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <table class="table table-bordered table-striped table-condensed">
+                          <thead>
+                            <th>Date</th>
+                            <th>IP Address</th>
+                            <th>Event</th>
+                            <th>Data</th>
+                          </thead>
+                          <tbody>
+                              <tr ng-repeat="entry in logData track by $index">
+                                  <td ng-bind="entry.logtime | date:'yyyy/MM/dd HH:mm:ss'"></td>
+                                  <td>{{ entry.ipAddress }}</td>
+                                  <td>{{ entry.eventType }}</td>
+                                  <td>{{ entry.eventData }}</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                        </div>
+                      </div>
+                  </div>
+      </div>
+    </div>

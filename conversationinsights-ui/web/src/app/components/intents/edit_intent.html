@@ -1,0 +1,122 @@
+<ol class="breadcrumb" breadcrumb="">
+  <li class="breadcrumb-item ng-scope active"><span>机器人代理 > {{ agent.name }} > 意图 > {{ intent.name }}</span></li>
+  <!-- Breadcrumb Menu-->
+  <li class="breadcrumb-menu">
+    <div class="btn-group" role="group">
+      <a class="btn btn-secondary" ng-click="deleteIntent()" confirm-click-title="删除意图" confirm-click="此操作将会删除该意图及其关联的所有实体。是否确定删除？"><i class="icon-trash"></i> &nbsp;删除意图</a>
+    </div>
+  </li>
+</ol>
+<div class="container-fluid">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-sm-12 col-lg-12">
+        <form>
+          <div class="card">
+            <div class="card-header">
+              <strong>增加表达式</strong>
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="name">用户说...</label>
+                    <input type="text" ng-model="expression_text" class="form-control" id="text" placeholder="输入用户可能说的...">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-sm btn-primary" ng-click="addExpression()"><i class="fa fa-dot-circle-o"></i> 保存</button>
+            </div>
+          </form>
+
+          <form>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="list-group" ng-repeat="expression in expressionList track by expression.id">
+                    <div class="list-group-item">
+                      <span id="expression_{{expression.id}}" ng-bind-html="expression.expression_highlighted_text | trusted"></span>
+                      <span class="pull-right">
+                        <span class="badge badge-default badge-pill mr-2" ng-hide="expression.parameters == null || expression.parameters.length == 0">{{ expression.parameters.length }}</span>
+                        <button class="btn btn-secondary" ng-click="runExpression(expression.name)">
+                          <span class="icon-energy"></span>
+                        </button>
+                        <button class="btn btn-secondary" ng-click="addParameter(expression.id)">
+                          <span class="icon-link"></span>
+                        </button>
+                        <button class="btn btn-secondary mr-2" data-toggle="collapse" ng-click="toggleArrow(expression.id)" data-target="#table_expression_{{expression.id}}" aria-expanded="false" aria-controls="table_expression_{{expression.id}}">
+                          <span class="icon-arrow-down" id="icon_expression_{{expression.id}}"></span>
+                        </button>
+                        <button class="btn btn btn-outline-danger" confirm-click-title="删除表达式" confirm-click="该操作将会删除该表达式及其对应的实体关联等。是否确定删除？" ng-click="deleteExpression(expression.id)">
+                          <span class="icon-trash"></span>
+                        </button>
+                      </span>
+                    </div>
+                    <div class="collapse" id="table_expression_{{expression.id}}">
+                      <table class="table table-bordered" ng-hide="expression.parameters == null || expression.parameters.length == 0">
+                        <thead>
+                          <tr>
+                            <th>实体</th>
+                            <th>对应值</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="parameter in expression.parameters">
+                            <td class="col-md-3">
+                              <select ng-options="entity.id as entity.name for entity in entityList" ng-change="updateParameterEntity(parameter.id, parameter.entityId)" ng-model="parameter.entityId" class="form-control">
+                                <option value="">Please select one</option>
+                              </select>
+                            </td>
+                            <td class="td-middle">{{ parameter.name }}</td>
+                            <td class="col-md-1">
+                              <button class="btn btn btn-outline-danger" ng-click="deleteParameter(parameter.id)">
+                                <span class="icon-trash"></span>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-12">
+        <form>
+          <div class="card">
+            <div class="card-header">
+              <strong>意图回应 (可选)</strong>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active">
+                  <input type="text" ng-model="formData.response_text" class="form-control" id="text" placeholder="输入意图可能的回应..." ng-keyup="$event.keyCode == 13 && saveNewResponse($event)"><br>
+                  <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="response in responses track by response.response_id">
+                      <span ng-bind-html="response.response_text | trusted"></span>
+                      <span class="pull-right">
+                        <button class="btn btn btn-outline-danger" confirm-click-title="删除回应" confirm-click="是否确定删除？" ng-click="deleteResponse(response.response_id)">
+                          <span class="icon-trash"></span>
+                        </button>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+-->
+  </div>
+</div>
