@@ -1,0 +1,8 @@
+{
+  "pipeline": "mitie",
+  "mitie_file": "./data/total_word_feature_extractor.dat",
+  "path" : "./",
+  "data" : "./data/examples/mynlu/demo-mynlu.json",
+  "storage": "gcs",
+  "bucket_name": "mynlu-models"
+}

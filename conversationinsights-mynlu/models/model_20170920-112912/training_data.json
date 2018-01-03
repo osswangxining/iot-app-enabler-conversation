@@ -1,0 +1,18 @@
+{
+  "mynlu_data": {
+    "common_examples": [
+      {
+        "entities": [], 
+        "intent": "\u67e5\u8be2\u6e29\u5ea626", 
+        "text": "\u76ee\u524d\u6c34\u4f4d\u662f\u591a\u5c11"
+      }, 
+      {
+        "entities": [], 
+        "intent": "\u67e5\u8be2\u6e29\u5ea626", 
+        "text": "\u770b\u4e0b\u6c34\u4f4d\u662f\u591a\u5c11"
+      }
+    ], 
+    "entity_synonyms": [], 
+    "regex_features": []
+  }
+}
